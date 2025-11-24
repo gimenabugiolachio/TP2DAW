@@ -34,5 +34,10 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'sales' => [
+    'url' => env('SALES_API_URL'),
+    'token' => env('SALES_JWT_TOKEN'),
+],
+
 
 ];

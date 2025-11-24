@@ -49,7 +49,7 @@
         </ul>
 
         <div class="d-flex gap-2">
-            <a href="{{ route('clients.edit', $client) }}" class="btn btn-warning">
+            <a href="{{ route('clients.edit', $client) }}" class="btn btn-success">
                 Editar
             </a>
 
@@ -59,10 +59,6 @@
                 @method('DELETE')
                 <button class="btn btn-danger">Eliminar</button>
             </form>
-
-            <a href="#" class="btn btn-info ms-auto disabled">
-                Ver ventas (próximo paso)
-            </a>
         </div>
 
     </div>

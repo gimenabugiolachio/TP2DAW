@@ -22,25 +22,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div id="nav" class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('clients*') ? 'active' : '' }}"
-                       href="{{ route('clients.index') }}">
-                        Clientes
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}"
-                       href="{{ route('users.index') }}">
-                        Usuarios
-                    </a>
-                </li>
-
-            </ul>
-
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button class="btn btn-outline-light btn-sm">Salir</button>

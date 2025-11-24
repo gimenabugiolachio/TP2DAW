@@ -6,18 +6,23 @@
 <div class="card shadow-sm">
     <div class="card-body">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div>
-                <h3 class="mb-0">Usuarios</h3>
-                <small class="text-secondary">Listado general</small>
-            </div>
+       <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h3 class="mb-0">Usuarios</h3>
+        <small class="text-secondary">Listado general</small>
+    </div>
 
-            @if(auth()->user()->role === 'admin')
-                <a href="{{ route('users.create') }}" class="btn btn-primary">
-                    + Nuevo usuario
-                </a>
-            @endif
-        </div>
+    <div>
+        <a href="{{ route('home') }}" class="btn btn-secondary me-2">
+            ← Inicio
+        </a>
+
+        <a href="{{ route('users.create') }}" class="btn btn-primary">
+            + Nuevo usuario
+        </a>
+    </div>
+</div>
+
 
         @if($users->count() === 0)
             <div class="alert alert-dark text-center">
