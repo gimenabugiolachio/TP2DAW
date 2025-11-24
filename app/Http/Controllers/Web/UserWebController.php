@@ -11,7 +11,7 @@ class UserWebController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id','desc')->paginate(10);
+        $users = User::orderBy('id', 'desc')->paginate(10);
         return view('users.index', compact('users'));
     }
 
@@ -23,11 +23,13 @@ class UserWebController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'name'       => 'required|string|max:255',
             'first_name' => 'required|string|max:100',
             'last_name'  => 'required|string|max:100',
             'username'   => 'required|string|max:50|unique:users,username',
             'email'      => 'required|email|unique:users,email',
             'phone'      => 'nullable|string|max:30',
+            'profile'    => 'required|string|max:255',
             'role'       => 'required|in:Administrador,Gestión,Consultas',
             'password'   => 'required|min:4|confirmed',
         ]);
@@ -35,7 +37,13 @@ class UserWebController extends Controller
         $data['password'] = Hash::make($data['password']);
         User::create($data);
 
-        return redirect()->route('users.index')->with('success','Usuario creado');
+        return redirect()->route('users.index')->with('success', 'Usuario creado');
+    }
+
+    // ✅ ESTE ES EL QUE FALTABA
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
     }
 
     public function edit(User $user)
@@ -46,11 +54,13 @@ class UserWebController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
+            'name'       => 'required|string|max:255',
             'first_name' => 'required|string|max:100',
             'last_name'  => 'required|string|max:100',
             'username'   => 'required|string|max:50|unique:users,username,' . $user->id,
             'email'      => 'required|email|unique:users,email,' . $user->id,
             'phone'      => 'nullable|string|max:30',
+            'profile'    => 'required|string|max:255',
             'role'       => 'required|in:Administrador,Gestión,Consultas',
             'password'   => 'nullable|min:4|confirmed',
         ]);
@@ -62,12 +72,13 @@ class UserWebController extends Controller
         }
 
         $user->update($data);
-        return redirect()->route('users.index')->with('success','Usuario actualizado');
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success','Usuario eliminado');
+        return redirect()->route('users.index')->with('success', 'Usuario eliminado');
     }
 }
